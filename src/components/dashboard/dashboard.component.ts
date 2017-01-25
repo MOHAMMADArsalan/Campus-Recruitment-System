@@ -11,7 +11,9 @@ export class DashboardComponent {
     @Input() companies: any;
     @Input() isLoading: boolean;
     @Input() students: any;
+    @Input() currentUser: any;
     isCompany: boolean = true;
+
     @Output() deleteData: EventEmitter<any>;
     constructor() {
         this.deleteData = new EventEmitter();
@@ -23,7 +25,6 @@ export class DashboardComponent {
         this.isCompany = tab === 'students' ? false : true;
     }
     delete(event) {
-        console.log("111111111111111111111111111111111111111111")
         this.deleteData.emit(event);
     }
 }

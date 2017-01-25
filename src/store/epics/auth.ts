@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
-
+import { ActionsObservable } from "redux-observable";
 import { AuthActions } from '../actions';
 
 
 @Injectable()
 export class AuthEpics {
-  constructor( private af: AngularFire) { }
+  constructor(private af: AngularFire) { }
 
   register = (action$) =>
     action$.ofType(AuthActions.SIGN_UP)
       .switchMap(({payload}): any => {
         return this.af.auth.createUser({ email: payload.email, password: payload.password }).then((response) => {
-          
-          let users = payload.type === 2 ? this.af.database.object(`companies/${response.uid}`):  this.af.database.object(`users/${response.uid}`);
+
+          let users = payload.type === 2 ? this.af.database.object(`companies/${response.uid}`) : this.af.database.object(`users/${response.uid}`);
           delete payload['password'];
           return users.set(payload).then(() => {
             return {
@@ -42,7 +42,7 @@ export class AuthEpics {
           { provider: AuthProviders.Password, method: AuthMethods.Password }).then((auth) => {
             this.setLocalStorage(auth)
             return {
-              type: AuthActions.LOGIN_SUCCESS,
+              type: AuthActions.GET_USER_INFO,
               payload: auth
             };
           }, (err) => {
@@ -52,7 +52,24 @@ export class AuthEpics {
             };
           })
       );
-
+  getUserInfo = (action$: ActionsObservable<any>) =>
+    action$.ofType(AuthActions.GET_USER_INFO)
+      .switchMap(({payload}) => {
+        return this.af.database.object("/users/" + payload.uid)
+          .map((user) => {
+            if (user) {
+              return {
+                type: AuthActions.GET_USER_INFO_SUCCESS,
+                payload: Object.assign({}, payload, user)
+              }
+            } else {
+              return Observable.of({
+                type: AuthActions.GET_USER_INFO_FAIL,
+                payload: {}
+              })
+            }
+          })
+      })
   // logout = (action$) =>
   //   action$.ofType(AuthActions.LOGOUT)
   //     .switchMap(() => {
@@ -70,7 +87,7 @@ export class AuthEpics {
           // console.log('auth exists: ', this.getLocalStorage())
           console.log('auth exists: ')
           return Observable.of({
-            type: AuthActions.LOGIN_SUCCESS,
+            type: AuthActions.GET_USER_INFO,
             payload: this.getLocalStorage()
           });
         } else {

@@ -1,4 +1,4 @@
-<nav-bar></nav-bar>
+<nav-bar [currentUser]="(user$ | async)"></nav-bar>
 <!--<router-outlet></router-outlet>-->
-<pre>{{companies$ | async}}</pre>
-<dashboard-component [companies]="(companies$ | async)" [isLoading]="(isLoading$ | async)" [students]="(students$ | async)" (deleteData)="deleteDataHandler($event)"></dashboard-component>
+<dashboard-component [currentUser]="(user$ | async)" [companies]="(companies$ | async)" [isLoading]="(isLoading$ | async)"
+    [students]="(students$ | async)" (deleteData)="deleteDataHandler($event)"></dashboard-component>

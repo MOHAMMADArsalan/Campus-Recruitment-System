@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { NgReduxModule } from 'ng2-redux';
 import { AngularFireModule } from 'angularfire2';
-import { StoreModule } from '../store';
+import { StoreModule, AuthActions } from '../store';
 import { RootContainer } from '../containers/root/root';
 import { ApplicationComponents, AppRoutes } from './routes';
 import { providers } from '../providers';
@@ -30,4 +30,8 @@ import { EqualValidator } from '../directives/equal-validator.directive';
   , entryComponents: []
   , bootstrap: [RootContainer]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private aa: AuthActions) {
+    this.aa.isLoggedIn();
+  }
+}

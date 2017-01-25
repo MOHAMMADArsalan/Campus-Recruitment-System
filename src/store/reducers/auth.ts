@@ -47,6 +47,13 @@ export const authReducer = function (state: IInitalState = InitalState, action: 
     //   return Object.assign({}, state, { checkedIn: { isCheckedIn: false, data: null } });
     // case AuthActions.USERCURRENTLOCATION:
     //   return Object.assign({}, state, { location: action.payload })
+    case AuthActions.GET_USER_INFO:
+      return Object.assign({}, state, { isLoadding: true });
+    case AuthActions.GET_USER_INFO_SUCCESS:
+      console.log("Wwwwwwwwwwwwwwwwwwwwwww", action.payload)
+      return Object.assign({}, state, { user: action.payload, isLoading: false });
+    case AuthActions.GET_USER_INFO_FAIL:
+      return Object.assign({}, state, { isLoadding: false });
     default:
       return state;
   }

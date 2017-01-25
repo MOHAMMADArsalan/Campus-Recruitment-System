@@ -23,6 +23,5 @@ export class AddCompanyContainer implements OnDestroy {
     }
     addCompany(company: any) {
         this.aa.register(company)
-        console.log("EEEEEEEEEEEEEEEEEEEEEEEEE", company)
     }
 }

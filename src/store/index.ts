@@ -57,7 +57,9 @@ export class StoreModule {
       createEpicMiddleware(this.ae.register),
       createEpicMiddleware(this.ae.login),
       createEpicMiddleware(this.ce.getCompanies),
-      createEpicMiddleware(this.se.getStudents)
+      createEpicMiddleware(this.se.getStudents),
+      createEpicMiddleware(this.ae.isLoggedIn),
+      createEpicMiddleware(this.ae.getUserInfo)
     ];
     this.ngRedux.configureStore(
       AppReducer,                                         // Main Reducer

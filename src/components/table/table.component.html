@@ -1,11 +1,11 @@
 <div class="table-responsive text-center">
     <span *ngIf="isLoading" class="glyphicon glyphicon-refresh glyphicon-spin" style="font-size: 5em;overflow: hidden"></span>
 <table *ngIf="!isLoading" class="table table-striped">
-    <thead table-header *ngIf="isCompany" [isCompany]="isCompany">
+    <thead table-header *ngIf="isCompany && data.length > 0" [isCompany]="isCompany">
     </thead>
     <tbody *ngIf="isCompany" (deleteData)="deleteDataHandler($event)" table-row [currentUser]="(currentUser$ | async)" [companylist]="data" [isCompany]="isCompany">
     </tbody>
-    <thead table-header *ngIf="!isCompany">
+    <thead table-header *ngIf="!isCompany && data.length > 0">
     </thead>
 
     <tbody table-row *ngIf="!isCompany" (deleteData)="deleteDataHandler($event)" [currentUser]="(currentUser$ | async)" [studentslist]="data" [isCompany]="isCompany">

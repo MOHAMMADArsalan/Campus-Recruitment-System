@@ -1,5 +1,5 @@
-import { Component } from "@angular/core";
-
+import { Component, Input } from "@angular/core";
+import {} from ""
 @Component({
     selector: "nav-bar",
     template: require("./nav-bar.component.html"),
@@ -7,5 +7,7 @@ import { Component } from "@angular/core";
 })
 
 export class NavBarComponent {
+    @Input() currentUser: any;
     constructor() { }
+    Logout() { }
 }

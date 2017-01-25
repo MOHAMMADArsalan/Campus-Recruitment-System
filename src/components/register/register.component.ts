@@ -39,7 +39,6 @@ export class RegisterContainer {
     add(form: any) {
         if (form.valid) {
             form.value['type'] = this.isCompanyRoute ? 2 : 3;
-            console.log("sssssssssss121 21s212s1 s",form.value)
             this.register.emit(form.value)
             // this.ae.register(form.value)
         }

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="currentUser.type == 1">
     <h1>Companies List</h1>
     <ul class="nav nav-tabs nav-justified">
         <li role=presentation class="active" (click)="showData('company')"><a href="#tab1" data-toggle="tab">Companies List</a></li>
@@ -10,18 +10,21 @@
                 <div class="tab-pane active" id="tab1" *ngIf="isCompany">
                     <span *ngIf="isLoading" class="glyphicon glyphicon-refresh glyphicon-spin" style="font-size: 5em;"></span>
                     <div *ngIf="!isLoading">
-                        <h1 *ngIf="checkLength(companies)">No Data Found</h1>
+                        <h1 *ngIf="companies.length === 0">No Data Found</h1>
                         <data-table [data]="companies" (deleteData)="delete($event)" [isLoading]="isLoading"  [isCompany]=true></data-table>
                     </div>
                 </div>
                 <div class="tab-pane" id="tab2" *ngIf="!isCompany">
                  <span *ngIf="isLoading" class="glyphicon glyphicon-refresh glyphicon-spin" style="font-size: 5em;"></span>
                     <div *ngIf="!isLoading">
-                        <h1 *ngIf="checkLength(students)">No Data Found</h1>
+                        <h1 *ngIf="students.length === 0">No Data Found</h1>
                         <data-table [data]="students" (deleteData)="delete($event)" [isLoading]="isLoading" [isCompany]=false></data-table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+<div class="container" *ngIf="currentUser.type == 3">
+    <h1>Students</h1>
 </div>

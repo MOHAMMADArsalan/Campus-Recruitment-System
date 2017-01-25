@@ -11,21 +11,14 @@ export class StudentEpics {
     getStudents = (action$: ActionsObservable<any>) =>
         action$.ofType(StudentAction.GET_STUDENTS)
             .switchMap(() => {
-                return this.af.database.list("/users")
+                return this.af.database.list("/users", {
+                    query: { orderByChild: 'type', equalTo: 3 }
+                })
                     .mergeMap((users) => {
                         if (users) {
-                            return users.map((_users) => {
-                                delete _users['$exists']
-                                if (_users.type === 3) {
-                                    return ({
-                                        type: StudentAction.GET_STUDENTS_SUCCESS,
-                                        payload: _users
-                                    })
-                                } else {
-                                    return ({
-                                        type: StudentAction.NULL
-                                    })
-                                }
+                            return Observable.of({
+                                type: StudentAction.GET_STUDENTS_SUCCESS,
+                                payload: users
                             })
                         } else {
                             return Observable.of({

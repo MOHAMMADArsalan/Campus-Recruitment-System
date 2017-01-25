@@ -14,13 +14,14 @@ export class CompanyEpics {
                 return this.af.database.list("/companies")
                     .mergeMap((company) => {
                         if (company) {
-                            return company.map((_company) => {
-                                delete _company['$exists']
-                                return ({
+                            return Observable.of({
                                     type: CompanyAction.GET_COMPANY_SUCCESS,
-                                    payload: _company
+                                    payload: company
                                 })
-                            })
+                            // return company.map((_company) => {
+                            //     delete _company['$exists']
+                                
+                            // })
                         } else {
                             return Observable.of({
                                 type: CompanyAction.GET_COMPANY_FAIL,
