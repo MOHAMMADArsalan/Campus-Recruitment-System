@@ -1,0 +1,14 @@
+<tr *ngFor="let company of keys(companylist);let i = index">
+    <td>{{i + 1}}</td>
+    <td>{{companylist[company]['name']}}</td>
+    <td>{{companylist[company]['address']}}</td>
+    <td>{{companylist[company]['email']}}</td>
+    <td><button class="btn btn-danger" (click)="delete(company,true)"><i class="glyphicon glyphicon-trash"></i> Delete</button></td>
+</tr>
+<tr *ngFor="let student of keys(studentslist);let i = index">
+    <td>{{i + 1}}</td>
+    <td>{{studentslist[student]['firstname']}}</td>
+    <td>{{studentslist[student]['lastname']}}</td>
+    <td>{{studentslist[student]['email']}}</td>
+    <td><button class="btn btn-danger" (click)="delete(student,false)"><i class="glyphicon glyphicon-trash"></i> Delete</button></td>
+</tr>

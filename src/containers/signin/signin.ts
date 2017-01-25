@@ -16,7 +16,7 @@ export class SigninContainer implements OnInit {
     // this.loader = true;
     this.user$.subscribe((auth) => {
       if (Object.keys(auth).length > 0) {
-        this.router.navigate(['/home'])
+        this.router.navigate(['/dashboard'])
       }
     })
     this.loginForm = this.fb.group({
@@ -29,7 +29,6 @@ export class SigninContainer implements OnInit {
   onSubmit(loginForm: any) {
     if (loginForm.valid) {
       this.aa.login(loginForm.value)
-      console.log("signin.html", loginForm)
     }
   }
 

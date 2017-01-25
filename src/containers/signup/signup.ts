@@ -1,9 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 import { Observable, select, AuthActions } from '../../store';
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ValidateEmail } from "./../../customValidators/customEmailValidation";
 @Component({
     selector: 'signup',
     template: require('./signup.html'),
@@ -13,10 +10,11 @@ export class SignupContainer {
     @select(['auth', 'isRegistered']) isRegistered$: Observable<boolean>;
     @select(['auth', 'isLoading']) isLoading$: Observable<boolean>;
     @select(['auth', 'isError']) isError$: Observable<any>;
-    signupForm: FormGroup;
     isError: string = "";
     registerSubscribe: any;
-    constructor(private router: Router, private fb: FormBuilder, private ae: AuthActions) {
+    errorSubscribe: any;
+
+    constructor(private router: Router, private ae: AuthActions) {
         this.registerSubscribe = this.isRegistered$.subscribe((result) => {
             if (result) {
                 // this.aa.makeRegisterFalse();
@@ -24,21 +22,17 @@ export class SignupContainer {
             }
         });
 
-        this.isError$.subscribe((response) => {
+        this.errorSubscribe = this.isError$.subscribe((response) => {
             if (response.msg) {
                 this.isError = response.msg;
             }
         })
-        this.signupForm = this.fb.group({
-            username: [null, Validators.required],
-            email: [null, Validators.compose([ValidateEmail, Validators.required])],
-            password: [null, Validators.compose([Validators.required, Validators.minLength(6)])]
-        })
+    }
+    ngOnDestroy() {
+        this.registerSubscribe.unsubscribe();
+        this.errorSubscribe.unsubscribe();
     }
     signup(form: any) {
-        if (form.valid) {
-            form.value['type'] = 3;
-            this.ae.register(form.value)
-        }
+        this.ae.register(form)
     }
 }

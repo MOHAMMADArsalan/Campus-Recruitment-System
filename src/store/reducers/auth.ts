@@ -32,7 +32,7 @@ export const authReducer = function (state: IInitalState = InitalState, action: 
     // case AuthActions.SETCURRENTUSERDATA:
     //   return Object.assign({}, state, { user: Object.assign({}, state.user, action.payload) });
     case AuthActions.SIGN_UP:
-      return Object.assign({}, state, { isLoading: true });
+      return Object.assign({}, state, { isLoading: true, isRegistered: false });
     case AuthActions.SIGN_UP_SUCCESS:
       return Object.assign({}, state, { isLoading: false, isRegistered: true });
     case AuthActions.SIGN_UP_FAIL:

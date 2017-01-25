@@ -3,19 +3,18 @@ import { Observable } from 'rxjs';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 
 import { AuthActions } from '../actions';
-import { HttpService } from '../../providers';
-import { appConfig } from '../../config/appConfig';
 
 
 @Injectable()
 export class AuthEpics {
-  constructor(private http: HttpService, private af: AngularFire) { }
+  constructor( private af: AngularFire) { }
 
   register = (action$) =>
     action$.ofType(AuthActions.SIGN_UP)
       .switchMap(({payload}): any => {
         return this.af.auth.createUser({ email: payload.email, password: payload.password }).then((response) => {
-          let users = this.af.database.object(`users/${response.uid}`);
+          
+          let users = payload.type === 2 ? this.af.database.object(`companies/${response.uid}`):  this.af.database.object(`users/${response.uid}`);
           delete payload['password'];
           return users.set(payload).then(() => {
             return {
@@ -64,23 +63,23 @@ export class AuthEpics {
   //       });
   //     });
 
-  // isLoggedIn = (action$) =>
-  //   action$.ofType(AuthActions.ISLOGGEDIN)
-  //     .switchMap(() => {
-  //       if (this.getLocalStorage()) {
-  //         // console.log('auth exists: ', this.getLocalStorage())
-  //         console.log('auth exists: ')
-  //         return Observable.of({
-  //           type: AuthActions.LOGIN_SUCCESS,
-  //           payload: this.getLocalStorage()
-  //         });
-  //       } else {
-  //         console.log('auth not exists')
-  //         return Observable.of({
-  //           type: AuthActions.LOGIN_FAIL
-  //         });
-  //       }
-  //     });
+  isLoggedIn = (action$) =>
+    action$.ofType(AuthActions.ISLOGGEDIN)
+      .switchMap(() => {
+        if (this.getLocalStorage()) {
+          // console.log('auth exists: ', this.getLocalStorage())
+          console.log('auth exists: ')
+          return Observable.of({
+            type: AuthActions.LOGIN_SUCCESS,
+            payload: this.getLocalStorage()
+          });
+        } else {
+          console.log('auth not exists')
+          return Observable.of({
+            type: AuthActions.LOGIN_FAIL
+          });
+        }
+      });
 
   // getCurrentUserData = (action$) =>
   //   action$.ofType(AuthActions.LOGIN_SUCCESS)
@@ -170,15 +169,15 @@ export class AuthEpics {
   //       }));
 
   private setLocalStorage(userObj): void {
-    localStorage.setItem('ng2-localStorage-user', JSON.stringify(userObj));
+    localStorage.setItem('campus-recruitment-system', JSON.stringify(userObj));
   }
 
   private clearLocalStorage(): void {
-    localStorage.removeItem('ng2-localStorage-user');
+    localStorage.removeItem('campus-recruitment-system');
   }
 
   private getLocalStorage() {
-    return JSON.parse(localStorage.getItem('ng2-localStorage-user'));
+    return JSON.parse(localStorage.getItem('campus-recruitment-system'));
   }
 
 
