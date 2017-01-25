@@ -10,8 +10,15 @@ import { select, Observable, AuthActions } from "./../../store";
 })
 export class SigninContainer implements OnInit {
   loginForm: FormGroup;
+  @select(['auth', 'user']) user$: Observable<any>;
+
   constructor(private router: Router, private fb: FormBuilder, private aa: AuthActions) {
     // this.loader = true;
+    this.user$.subscribe((auth) => {
+      if (Object.keys(auth).length > 0) {
+        this.router.navigate(['/home'])
+      }
+    })
     this.loginForm = this.fb.group({
       email: ['', Validators.compose([Validators.required, ValidateEmail])],
       password: [null, Validators.compose([Validators.required])]
@@ -21,6 +28,7 @@ export class SigninContainer implements OnInit {
   ngOnInit() { }
   onSubmit(loginForm: any) {
     if (loginForm.valid) {
+      this.aa.login(loginForm.value)
       console.log("signin.html", loginForm)
     }
   }

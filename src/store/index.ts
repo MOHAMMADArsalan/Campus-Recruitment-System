@@ -45,8 +45,8 @@ export class StoreModule {
     private ae: AuthEpics,
   ) {
     const middleware = [
-      createEpicMiddleware(this.ae.register)
-      // createEpicMiddleware(this.ae.register),
+      createEpicMiddleware(this.ae.register),
+      createEpicMiddleware(this.ae.login),
     ];
     this.ngRedux.configureStore(
       AppReducer,                                         // Main Reducer

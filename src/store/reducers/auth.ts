@@ -5,7 +5,7 @@ interface IInitalState {
   isLoading: boolean;
   isError: { status: boolean, msg: string }
   isLoggedin: boolean;
-  // user: IlocalStorageUser;
+  user: any;
   isRegistered: boolean;
 }
 
@@ -13,22 +13,22 @@ const InitalState: IInitalState = {
   isLoading: false,
   isError: { status: false, msg: null },
   isLoggedin: false,
-  // user: null,
+  user: {},
   isRegistered: false,
 };
 
 export const authReducer = function (state: IInitalState = InitalState, action: { type: string, payload?: any }) {
   switch (action.type) {
+    case AuthActions.LOGIN:
+      return Object.assign({}, state, { isLoading: true });
     case AuthActions.LOGIN_FAIL:
-      return Object.assign({}, state, { isLoading: false, isLoggedin: false, user: null });
-    // case AuthActions.LOGIN_SUCCESS:
-    //   return Object.assign({}, state, { isLoading: false, isLoggedin: true, user: action.payload });
+      return Object.assign({}, state, { isLoading: false, isLoggedin: false, user: {} });
+    case AuthActions.LOGIN_SUCCESS:
+      return Object.assign({}, state, { isLoading: false, isLoggedin: true, user: action.payload });
     // case AuthActions.LOGOUT_FAIL:
     //   return Object.assign({}, state, { isLoading: false, isLoggedin: false, user: null });
     // case AuthActions.LOGOUT_SUCCESS:
     //   return Object.assign({}, state, { isLoading: false, isLoggedin: false, user: null });
-    // case AuthActions.LOGIN:
-    //   return Object.assign({}, state, { isLoading: true });
     // case AuthActions.SETCURRENTUSERDATA:
     //   return Object.assign({}, state, { user: Object.assign({}, state.user, action.payload) });
     case AuthActions.SIGN_UP:
