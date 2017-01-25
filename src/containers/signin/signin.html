@@ -1,0 +1,27 @@
+<nav-login></nav-login>
+<div class="container  text-center" style="margin-top:50px;">
+<h2 class="form-signin-heading col-sm-4 col-sm-offset-4">Please Sign in</h2>
+<form class="col-sm-4 col-sm-offset-4 auth-form-body" [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm)">
+	<div [ngClass]="{'has-error': !loginForm.controls['email'].valid && loginForm.controls['email'].touched}">
+		<label for="inputEmail" class="pull-left">Email address</label>
+		<input type="email" name="email" id="inputEmail" class="form-control" formControlName="email" placeholder="Email address"
+			required autofocus>
+		<span class="marginTop10px" *ngIf="loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched">Email is Required </span>
+		<span class="marginTop10px" *ngIf="loginForm.controls['email'].hasError('InValidPattern') && !loginForm.controls['email'].hasError('required') && loginForm.controls['email'].touched">Email Pattern is not correct </span>
+	</div>
+	<br/>
+	<div [ngClass]="{ 'has-error': !loginForm.controls['password'].valid && loginForm.controls['password'].touched }">
+		<label for="inputPassword" class="pull-left">Password</label>
+		<input type="password" name="password" id="inputPassword" class="form-control" formControlName="password" placeholder="Password"
+			required>
+
+		<div *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Password is required</div>
+	</div>
+	<br/>
+	<button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="!loginForm.valid">Sign in</button>
+</form>
+<div class="col-sm-4 col-sm-offset-4 text-center has-error" style="margin-top: 10px;">{{err}}</div>
+<div class="col-sm-4 col-sm-offset-4 text-center" style="margin-top: 10px;"> Don't have account?? <a class="cursor-pointer" routerLink="/signup">Create an account.</a>
+</div>
+</div>
+<!-- /container -->

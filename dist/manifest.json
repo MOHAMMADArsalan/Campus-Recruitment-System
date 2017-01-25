@@ -1,0 +1,17 @@
+{
+  "name": "My Accessible",
+  "short_name": "My Accessible",
+  "icons": [{
+    "src": "assets/images/icon192x192.png",
+    "sizes": "192x192",
+    "type": "image/png"
+  }, {
+    "src": "assets/images/icon256x256.png",
+    "sizes": "256x256",
+    "type": "image/png"
+  }],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#F89406",
+  "theme_color": "#F89406"
+}
