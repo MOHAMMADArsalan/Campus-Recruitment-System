@@ -21,21 +21,11 @@ export class TableRowComponent {
         this.saveMultipath = new EventEmitter();
 
     }
-    checkIsApply(applied) {
-        console.log("appliedddddddddddddddddddddddd", applied)
-    }
     keys(object) {
         return object ? Object.keys(object) : [];
     }
     delete(key, id, type) {
         let multipath = {};
-        // if (type === 'company') {
-        //     multipath[`companies/${key}`] = null;
-        //     multipath[`users/${key}`] = null;
-        // } else if (type === 'student') {
-        //     multipath[`users/${key}`] = null;
-        // } else {
-        // }
         multipath[`posts/${key}`] = null;
         multipath[`company-posts/${id}/${key}`] = null;
         this.deleteData.emit(multipath)

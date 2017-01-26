@@ -26,7 +26,6 @@ export class TableComponent {
     }
     saveMultipathHandler(event) { 
         this.saveMultipath.emit(event)
-        console.log("344444444444443",event)
     }
 
 }

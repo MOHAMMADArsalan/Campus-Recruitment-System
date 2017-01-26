@@ -54,7 +54,6 @@ export class CompanyEpics {
             .switchMap(({payload}) => {
                 return this.af.database.object(`/company-posts/${payload.coId}/${payload.key}`)
                     .mergeMap((posts) => {
-                        console.log("getOneCompanyPost", posts)
                         if (posts) {
                             return Observable.of({
                                 type: CompanyAction.GET_ONE_POST_BY_COMPANY_SUCCESS,
@@ -78,10 +77,6 @@ export class CompanyEpics {
                                 type: CompanyAction.GET_POST_SUCCESS,
                                 payload: posts
                             })
-                            // return company.map((_company) => {
-                            //     delete _company['$exists']
-
-                            // })
                         } else {
                             return Observable.of({
                                 type: CompanyAction.GET_POST_FAIL,

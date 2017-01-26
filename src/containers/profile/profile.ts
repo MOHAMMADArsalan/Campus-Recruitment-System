@@ -17,8 +17,8 @@ export class ProfileContainer implements OnInit {
 
     ngOnInit() { }
     saveMultipathHandler(multipathObj:any) {
-        console.log("$444444444444444444444444444",multipathObj)
         this.fb.saveMultipath(multipathObj).then(() => {
+        console.log("Updated",multipathObj)
 
         }, (err) => {
             console.log("Error: ", err)

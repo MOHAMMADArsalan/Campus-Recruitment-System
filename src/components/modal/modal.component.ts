@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, Output, EventEmitter, OnChanges } from "@angular/core";
+import { Component, Input, ElementRef, Output, EventEmitter } from "@angular/core";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { FirebaseService } from "./../../providers";
 declare var require: any;
@@ -9,7 +9,7 @@ declare var require: any;
     styles: [require("./modal.scss"), require("./../../containers/signup/signup.scss")]
 })
 
-export class ModalComponent implements OnChanges {
+export class ModalComponent {
     @Input() IsPrivate: boolean;
     @Input() pushKey: string;
     @Input() currentUser: any;
@@ -24,13 +24,6 @@ export class ModalComponent implements OnChanges {
         })
 
     }
-    ngOnChanges(value: any) {
-        console.log(this.currentUser)
-    }
-    // saveToFirebase(Obj: any, file: Object, form: any, isPrivate: boolean) {
-    //     let multipath = {};
-
-    // }
     onSubmit(form: any) {
         if (form.valid) {
             let multipath = {};
@@ -45,7 +38,6 @@ export class ModalComponent implements OnChanges {
             let newObj = Object.assign({}, Obj);
             newObj['created-by'] = this.currentUser.auth.uid;
             multipath[`posts/${this.pushKey}`] = newObj;
-
             this.saveMultipath.emit(multipath);
         }
     }

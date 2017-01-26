@@ -16,13 +16,5 @@ export class AuthGuardService implements CanActivate {
             this.router.navigate(['/signin']);
             return false;
         }
-        // return this.af.auth.take(1).map(authState => {
-        //     if (authState) {
-        //         console.log('authGuard: authenticated');
-        //     } else {
-        //         console.log('authGuard: not authenticated');
-        //         return false;
-        //     }
-        // });
     }
 }

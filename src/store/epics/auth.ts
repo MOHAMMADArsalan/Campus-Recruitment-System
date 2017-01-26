@@ -101,7 +101,6 @@ export class AuthEpics {
     action$.ofType(AuthActions.ISLOGGEDIN)
       .switchMap(() => {
         if (this.getLocalStorage()) {
-          // console.log('auth exists: ', this.getLocalStorage())
           console.log('auth exists: ')
           return Observable.of({
             type: AuthActions.GET_USER_INFO,

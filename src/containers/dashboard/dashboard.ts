@@ -55,7 +55,6 @@ export class DashboardContainer {
         })
     }
     saveMultipath(multipath: Object) {
-        console.log("#00000000000000000000000000000000000000", multipath)
         this.fb.saveMultipath(multipath).then(() => {
             console.log("Save Multipath Data");
             this.isPosted = true;
