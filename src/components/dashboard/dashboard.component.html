@@ -10,15 +10,12 @@
         <div class="row text-center">
             <div class="tab-content clearfix">
                 <div class="tab-pane active" id="tab1" *ngIf="tab == 'company'">
-                        <h1 *ngIf="companies.length === 0">No Data Found</h1>
                         <data-table [data]="companies" (deleteData)="delete($event)" [isLoading]="isLoading" [type]="'company'"></data-table>
                     </div>
                     <div class="tab-pane" id="tab2" *ngIf="tab == 'students'">
-                        <h1 *ngIf="students.length === 0">No Data Found</h1>
                         <data-table [data]="students" (deleteData)="delete($event)" [isLoading]="isLoading" [type]="'student'"></data-table>
                     </div>
                     <div class="tab-pane active" id="tab3" *ngIf="tab == 'posts'">
-                        <h1 *ngIf="posts.length === 0">No Data Found</h1>
                         <data-table [data]="posts" (deleteData)="delete($event)" [isLoading]="isLoading" [type]="'posts'"></data-table>
                     </div>
 </div>
@@ -27,7 +24,6 @@
 </div>
 <div class="container" *ngIf="currentUser.type == 3">
     <h1>POST LIST </h1>
-    <h1 *ngIf="posts.length === 0">No Data Found</h1>
     <data-table [data]="posts" (deleteData)="delete($event)" (saveMultipath)="saveMultipathHandler($event)" [isLoading]="isLoading"
         [type]="'posts-student'"></data-table>
 </div>
