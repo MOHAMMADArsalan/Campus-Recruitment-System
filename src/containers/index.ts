@@ -4,6 +4,8 @@ import { SignupContainer } from './signup/signup';
 import { RootContainer } from './root/root';
 import { DashboardContainer } from "./dashboard/dashboard";
 import { AddCompanyContainer } from "./addcompany/addcompany";
+import { ProfileContainer } from "./profile/profile"
+import { DetailsContainer } from "./details/details"
 export const Containers: any[] = [
     HomeContainer
     , SigninContainer
@@ -11,6 +13,9 @@ export const Containers: any[] = [
     , RootContainer
     , DashboardContainer
     , AddCompanyContainer
+    , ProfileContainer
+    , DetailsContainer
+
 ]
 
 export {
@@ -20,4 +25,7 @@ export {
     , RootContainer
     , DashboardContainer
     , AddCompanyContainer
+    , ProfileContainer
+    , DetailsContainer
+
 }

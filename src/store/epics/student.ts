@@ -13,8 +13,7 @@ export class StudentEpics {
             .switchMap(() => {
                 return this.af.database.list("/users", {
                     query: { orderByChild: 'type', equalTo: 3 }
-                })
-                    .mergeMap((users) => {
+                }).mergeMap((users) => {
                         if (users) {
                             return Observable.of({
                                 type: StudentAction.GET_STUDENTS_SUCCESS,
@@ -23,7 +22,7 @@ export class StudentEpics {
                         } else {
                             return Observable.of({
                                 type: StudentAction.GET_STUDENTS_FAIL,
-                                payload: {}
+                                payload: []
                             })
                         }
                     })

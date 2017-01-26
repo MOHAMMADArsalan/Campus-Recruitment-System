@@ -1,14 +1,31 @@
-<tr *ngIf="isCompany">
+<tr *ngIf="type == 'company'">
     <th style="text-align: center;">#</th>
     <th style="text-align: center;">Company Name</th>
     <th style="text-align: center;">Address</th>
     <th style="text-align: center;">Email</th>
-    <th style="text-align: center;">Delete</th>
+    <!--<th style="text-align: center;">Delete</th>-->
 </tr>
-<tr *ngIf="!isCompany">
+<tr *ngIf="type == 'student'">
     <th style="text-align: center;">#</th>
     <th style="text-align: center;">First Name</th>
     <th style="text-align: center;">Last Name</th>
     <th style="text-align: center;">Email</th>
+    <!--<th style="text-align: center;">Delete</th>-->
+</tr>
+<tr *ngIf="type == 'posts'">
+    <th style="text-align: center;">#</th>
+    <th style="text-align: center;">Title</th>
+    <th style="text-align: center;">Desc</th>
+    <th style="text-align: center;">Salary</th>
+    <th style="text-align: center;">Posted Date</th>
+    <th style="text-align: center;">Applied</th>
     <th style="text-align: center;">Delete</th>
+</tr>
+<tr *ngIf="type == 'posts-student'">
+    <th style="text-align: center;">#</th>
+    <th style="text-align: center;">Title</th>
+    <th style="text-align: center;">Desc</th>
+    <th style="text-align: center;">Salary</th>
+    <th style="text-align: center;">Posted Date</th>
+    <th style="text-align: center;">Applied</th>
 </tr>

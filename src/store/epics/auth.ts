@@ -3,30 +3,47 @@ import { Observable } from 'rxjs';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { ActionsObservable } from "redux-observable";
 import { AuthActions } from '../actions';
-
+import { FirebaseService } from "./../../providers"
 
 @Injectable()
 export class AuthEpics {
-  constructor(private af: AngularFire) { }
+  constructor(private af: AngularFire, private fb: FirebaseService) { }
 
   register = (action$) =>
     action$.ofType(AuthActions.SIGN_UP)
       .switchMap(({payload}): any => {
         return this.af.auth.createUser({ email: payload.email, password: payload.password }).then((response) => {
-
-          let users = payload.type === 2 ? this.af.database.object(`companies/${response.uid}`) : this.af.database.object(`users/${response.uid}`);
-          delete payload['password'];
-          return users.set(payload).then(() => {
-            return {
-              type: AuthActions.SIGN_UP_SUCCESS,
-              payload: response
-            };
-          }, (err) => {
-            return {
-              type: AuthActions.SIGN_UP_FAIL,
-              payload: { isError: { status: false, msg: err.message } }
-            };
-          });
+          let multipath = {};
+          if (payload.type === 2) {
+            delete payload['password'];
+            multipath[`companies/${response.uid}`] = payload;
+            multipath[`users/${response.uid}`] = payload;
+            return this.fb.saveMultipath(multipath).then(() => {
+              return {
+                type: AuthActions.SIGN_UP_SUCCESS,
+                payload: response
+              };
+            }, (err) => {
+              return {
+                type: AuthActions.SIGN_UP_FAIL,
+                payload: { isError: { status: false, msg: err.message } }
+              };
+            });
+          } else {
+            let users = this.af.database.object(`users/${response.uid}`);
+            delete payload['password'];
+            return users.set(payload).then(() => {
+              return {
+                type: AuthActions.SIGN_UP_SUCCESS,
+                payload: response
+              };
+            }, (err) => {
+              return {
+                type: AuthActions.SIGN_UP_FAIL,
+                payload: { isError: { status: false, msg: err.message } }
+              };
+            });
+          }
         }, (err) => {
           return {
             type: AuthActions.SIGN_UP_FAIL,
@@ -70,15 +87,15 @@ export class AuthEpics {
             }
           })
       })
-  // logout = (action$) =>
-  //   action$.ofType(AuthActions.LOGOUT)
-  //     .switchMap(() => {
-  //       this.af.auth.logout();
-  //       this.clearLocalStorage();
-  //       return Observable.of({
-  //         type: AuthActions.LOGOUT_SUCCESS
-  //       });
-  //     });
+  logout = (action$) =>
+    action$.ofType(AuthActions.LOGOUT)
+      .switchMap(() => {
+        this.af.auth.logout();
+        this.clearLocalStorage();
+        return Observable.of({
+          type: AuthActions.LOGOUT_SUCCESS
+        });
+      });
 
   isLoggedIn = (action$) =>
     action$.ofType(AuthActions.ISLOGGEDIN)

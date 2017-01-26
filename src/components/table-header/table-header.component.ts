@@ -6,7 +6,7 @@ import { Component, Input } from "@angular/core";
 })
 
 export class TableHeaderComponent {
-    @Input() isCompany: boolean;
+    @Input() type: boolean;
     constructor() {
 
     }

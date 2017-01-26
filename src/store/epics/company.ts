@@ -15,12 +15,12 @@ export class CompanyEpics {
                     .mergeMap((company) => {
                         if (company) {
                             return Observable.of({
-                                    type: CompanyAction.GET_COMPANY_SUCCESS,
-                                    payload: company
-                                })
+                                type: CompanyAction.GET_COMPANY_SUCCESS,
+                                payload: company
+                            })
                             // return company.map((_company) => {
                             //     delete _company['$exists']
-                                
+
                             // })
                         } else {
                             return Observable.of({
@@ -30,5 +30,64 @@ export class CompanyEpics {
                         }
                     })
             })
+    getCompanyPost = (action$: ActionsObservable<any>) =>
+        action$.ofType(CompanyAction.GET_POST_BY_COMPANY)
+            .switchMap(({payload}) => {
+                return this.af.database.list(`/company-posts/${payload.uid}`)
+                    .mergeMap((posts) => {
+                        if (posts) {
+                            return Observable.of({
+                                type: CompanyAction.GET_POST_BY_COMPANY_SUCCESS,
+                                payload: posts
+                            })
+                        } else {
+                            return Observable.of({
+                                type: CompanyAction.GET_POST_BY_COMPANY_FAIL,
+                                payload: []
+                            })
+                        }
+                    })
 
+            })
+    getOneCompanyPost = (action$: ActionsObservable<any>) =>
+        action$.ofType(CompanyAction.GET_ONE_POST_BY_COMPANY)
+            .switchMap(({payload}) => {
+                return this.af.database.object(`/company-posts/${payload.coId}/${payload.key}`)
+                    .mergeMap((posts) => {
+                        console.log("getOneCompanyPost", posts)
+                        if (posts) {
+                            return Observable.of({
+                                type: CompanyAction.GET_ONE_POST_BY_COMPANY_SUCCESS,
+                                payload: posts
+                            })
+                        } else {
+                            return Observable.of({
+                                type: CompanyAction.GET_ONE_POST_BY_COMPANY_FAIL,
+                                payload: []
+                            })
+                        }
+                    })
+            })
+    getPosts = (action$: ActionsObservable<any>) =>
+        action$.ofType(CompanyAction.GET_POST)
+            .switchMap(() => {
+                return this.af.database.list("/posts")
+                    .mergeMap((posts) => {
+                        if (posts) {
+                            return Observable.of({
+                                type: CompanyAction.GET_POST_SUCCESS,
+                                payload: posts
+                            })
+                            // return company.map((_company) => {
+                            //     delete _company['$exists']
+
+                            // })
+                        } else {
+                            return Observable.of({
+                                type: CompanyAction.GET_POST_FAIL,
+                                payload: []
+                            })
+                        }
+                    })
+            })
 }

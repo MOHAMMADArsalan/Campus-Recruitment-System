@@ -3,12 +3,32 @@
     <td>{{company['name']}}</td>
     <td>{{company['address']}}</td>
     <td>{{company['email']}}</td>
-    <td><button class="btn btn-danger" (click)="delete(company['$key'],true)"><i class="glyphicon glyphicon-trash"></i> Delete</button></td>
+    <!--<td><button class="btn btn-danger" (click)="delete(company['$key'],'company')"><i class="glyphicon glyphicon-trash"></i> Delete</button></td>-->
 </tr>
 <tr *ngFor="let student of studentslist;let i = index">
     <td>{{i + 1}}</td>
     <td>{{student['firstname']}}</td>
     <td>{{student['lastname']}}</td>
     <td>{{student['email']}}</td>
-    <td><button class="btn btn-danger" (click)="delete(student['$key'],false)"><i class="glyphicon glyphicon-trash"></i> Delete</button></td>
+    <!--<td><button class="btn btn-danger" (click)="delete(student['$key'],'student')"><i class="glyphicon glyphicon-trash"></i> Delete</button></td>-->
+</tr>
+<tr *ngFor="let post of postslist;let i = index">
+    <td>{{i + 1}}</td>
+    <td>{{post?.title}}</td>
+    <td>{{post?.desc}}</td>
+    <td>{{post?.salary}}</td>
+    <td>{{post?.timestamp | date}}</td>
+    <td>
+        <span *ngIf="type == 'posts-student'">
+            <button class="btn btn-primary" [disabled]="post?.applied[currentUser?.auth?.uid]" (click)="apply(post['$key'],post['created-by'],post['applied-count'])"><span *ngIf="post?.applied[currentUser?.auth?.uid]">Applied</span>
+        <span
+            *ngIf="!post?.applied[currentUser?.auth?.uid]">Apply</span>
+            </button>
+            </span>
+            <span *ngIf="type !== 'posts-student'">{{post['applied-count']}}</span>
+    </td>
+    <td *ngIf="type !== 'posts-student'">
+        <a routerLink="/post/details" [queryParams]="{postId :post['$key'], id: post['created-by'] }">View Details</a>
+    </td>
+    <td *ngIf="type !== 'posts-student'"><button class="btn btn-danger" (click)="delete(post['$key'],post['created-by'],'post')"><i class="glyphicon glyphicon-trash"></i> Delete</button></td>
 </tr>

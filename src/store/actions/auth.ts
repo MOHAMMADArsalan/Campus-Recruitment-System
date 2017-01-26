@@ -14,9 +14,14 @@ export class AuthActions {
     static LOGIN_SUCCESS: string = 'LOGIN_SUCCESS';
     static LOGIN_FAIL: string = 'LOGIN_FAIL';
 
+
     static SIGN_UP: string = 'SIGN_UP';
     static SIGN_UP_SUCCESS: string = 'SIGN_UP_SUCCESS';
     static SIGN_UP_FAIL: string = 'SIGN_UP_FAIL';
+
+    static LOGOUT: string = 'LOGOUT';
+    static LOGOUT_SUCCESS: string = 'LOGOUT_SUCCESS';
+    static LOGOUT_FAIL: string = 'LOGOUT_FAIL';
 
     static GET_USER_INFO: string = 'GET_USER_INFO';
     static GET_USER_INFO_SUCCESS: string = 'GET_USER_INFO_SUCCESS';
@@ -49,6 +54,11 @@ export class AuthActions {
     isLoggedIn(): void {
         this.ngRedux.dispatch({
             type: AuthActions.ISLOGGEDIN
+        })
+    }
+    logout(): void {
+        this.ngRedux.dispatch({
+            type: AuthActions.LOGOUT
         })
     }
 

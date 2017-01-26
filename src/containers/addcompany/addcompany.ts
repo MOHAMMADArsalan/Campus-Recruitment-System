@@ -9,6 +9,7 @@ import { Router } from "@angular/router";
 export class AddCompanyContainer implements OnDestroy {
     registerSubscribe: any;
     errorSubscribe: any;
+    @select(['auth', 'user']) user$: Observable<any>;
     @select(['auth', 'isRegistered']) isRegistered$: Observable<any>;
     constructor(private aa: AuthActions, private router: Router) {
         this.registerSubscribe = this.isRegistered$.subscribe((result) => {

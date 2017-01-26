@@ -5,7 +5,8 @@ import { RegisterContainer } from "./register/register.component";
 import { TableComponent } from "./table/table.component";
 import { TableHeaderComponent } from "./table-header/table-header.component";
 import { TableRowComponent } from "./table-row/table-row.component";
-
+import { ModalComponent } from "./modal/modal.component";
+import { PostListComponent } from "./post-list/post-list";
 export const Components: any[] = [
     NavLoginComponent,
     NavBarComponent,
@@ -13,7 +14,9 @@ export const Components: any[] = [
     RegisterContainer,
     TableComponent,
     TableHeaderComponent,
-    TableRowComponent
+    TableRowComponent,
+    ModalComponent,
+    PostListComponent
 ]
 
 export {
@@ -23,5 +26,7 @@ export {
     RegisterContainer,
     TableComponent,
     TableHeaderComponent,
-    TableRowComponent
+    TableRowComponent,
+    ModalComponent,
+    PostListComponent
 }

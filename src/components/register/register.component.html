@@ -1,7 +1,7 @@
 <!--<nav-login></nav-login>-->
 <div class="container text-center" style="margin-top:50px;">
-<h2 class="form-signin-heading col-sm-4 col-sm-offset-4"> <span *ngIf="isCompanyRoute">Add Company</span> <span *ngIf="!isCompanyRoute">Sign up</span></h2>
-<div>
+<h2 class="form-signin-heading col-sm-4 col-sm-offset-4"> <span *ngIf="isCompanyRoute && !isProfile">Add Company</span> <span *ngIf="!isCompanyRoute && !isProfile">Sign up</span></h2>
+<div *ngIf="!isProfile">
     <form class="col-sm-4 col-sm-offset-4 auth-form-body" [formGroup]="signupForm">
         <div [ngClass]="{'has-error': !signupForm.controls['name'].valid && signupForm.controls['name'].touched }">
             <label for="name" class="pull-left">
@@ -10,8 +10,9 @@
                 </label>
             <input type="text" id="name" formControlName="name" class="form-control" placeholder="Name" autofocus required>
             <span class="pull-right" *ngIf="signupForm.controls['name'].hasError('required') && signupForm.controls['name'].touched">
-                    <span *ngIf="isCompanyRoute">Name</span>
-            <span *ngIf="!isCompanyRoute">User name</span> is Required</span>
+                <span *ngIf="isCompanyRoute">Name</span>
+            <span *ngIf="!isCompanyRoute">User name</span> is Required
+            </span>
         </div>
         <br>
         <div *ngIf="!isCompanyRoute" [ngClass]="{'has-error': !signupForm.controls['firstname'].valid && signupForm.controls['firstname'].touched }">
@@ -48,6 +49,60 @@
         <br>
         <br>
         <button class="btn btn-lg btn-primary btn-block" (click)="add(signupForm)" [disabled]="!signupForm.valid">Sign up</button>
+        <div class="has-error" *ngIf="isError">{{isError}}</div>
+    </form>
+</div>
+<div *ngIf="isProfile">
+    <form class="col-sm-4 col-sm-offset-4 auth-form-body" [formGroup]="signupForm" *ngIf="viewLoaded">
+        <div [ngClass]="{'has-error': !signupForm.controls['name'].valid && signupForm.controls['name'].touched }">
+            <label for="name" class="pull-left">
+                    <span *ngIf="isCompanyRoute || currentUser.type == 2">Name</span> 
+                    <span *ngIf="!isCompanyRoute && currentUser.type != 2">User name</span>
+                </label>
+            <input type="text" id="name" formControlName="name" class="form-control" placeholder="Name" autofocus required>
+            <span class="pull-right" *ngIf="signupForm.controls['name'].hasError('required') && signupForm.controls['name'].touched">
+                <span *ngIf="isCompanyRoute || currentUser.type == 2">Name</span>
+            <span *ngIf="!isCompanyRoute && currentUser.type != 2">User name</span> is Required
+            </span>
+        </div>
+        <br>
+        <div *ngIf="!isCompanyRoute && currentUser.type != 2" [ngClass]="{'has-error': !signupForm.controls['firstname'].valid && signupForm.controls['firstname'].touched }">
+            <label for="Firstname" class="pull-left">Firstname</label>
+            <input type="text" id="Firstname" formControlName="firstname" class="form-control" placeholder="First Name" autofocus required>
+            <span class="pull-right" *ngIf="signupForm.controls['firstname'].hasError('required') && signupForm.controls['firstname'].touched">First Name is Required</span>
+            <br>
+        </div>
+        <div *ngIf="isCompanyRoute || currentUser.type == 2" [ngClass]="{'has-error': !signupForm.controls['address'].valid && signupForm.controls['address'].touched }">
+            <label for="Address" class="pull-left">Address</label>
+            <input type="text" id="Address" formControlName="address" class="form-control" placeholder="Address" autofocus required>
+            <span class="pull-right" *ngIf="signupForm.controls['address'].hasError('required') && signupForm.controls['address'].touched">Address is Required</span>
+        </div>
+        <div *ngIf="!isCompanyRoute  && currentUser.type != 2" [ngClass]="{'has-error': !signupForm.controls['lastname'].valid && signupForm.controls['lastname'].touched }">
+            <label for="Lastname" class="pull-left">Lastname</label>
+            <input type="text" id="Lastname" formControlName="lastname" class="form-control" placeholder="Last Name" autofocus required>
+            <span class="pull-right" *ngIf="signupForm.controls['lastname'].hasError('required') && signupForm.controls['lastname'].touched">Lastname is Required</span>
+            <br>
+        </div>
+
+        <div *ngIf="isProfile && currentUser.type != 2" [ngClass]="{'has-error': !signupForm.controls['year'].valid && signupForm.controls['year'].touched }">
+            <label for="year" class="pull-left">Year</label>
+            <input type="text" id="year" formControlName="year" class="form-control" placeholder="Year" required>
+            <span class="pull-right" *ngIf="signupForm.controls['year'].hasError('required') && signupForm.controls['year'].touched">Year is Required</span>
+            <br>
+        </div>
+
+        <div *ngIf="isProfile && currentUser.type != 2" [ngClass]="{'has-error': !signupForm.controls['gpa'].valid && signupForm.controls['gpa'].touched }">
+            <label for="gpa" class="pull-left">GPA</label>
+            <input type="text" id="gpa" formControlName="gpa" class="form-control" placeholder="GPA" required>
+            <span class="pull-right" *ngIf="signupForm.controls['gpa'].hasError('required') && signupForm.controls['gpa'].touched">GPA is Required</span>
+        </div>
+
+        <br>
+        <label for="inputEmail" class="pull-left">Email address</label>
+        <input type="text" id="inputEmail" formControlName="email" class="form-control" placeholder="Email address" required>
+        <br>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" (click)="add(signupForm)" [disabled]="!signupForm.valid"><span *ngIf="isProfile">Update</span><span *ngIf="!isProfile">Sign up</span></button>
         <div class="has-error" *ngIf="isError">{{isError}}</div>
     </form>
 </div>

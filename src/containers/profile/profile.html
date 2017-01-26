@@ -1,0 +1,5 @@
+<nav-bar [currentUser]="(user$ | async)"></nav-bar>
+<div class="container  text-center" style="margin-top:50px;">
+    <register (saveMultipath)="saveMultipathHandler($event)" [currentUser]="(user$ | async)" [isProfile]=true></register>
+</div>
+<!-- /container -->

@@ -12,14 +12,21 @@ export class TableComponent {
 
     @select(['auth', 'user']) currentUser$: Observable<any>;
     @Input() isLoading: boolean;
-    @Input() isCompany: boolean;
+    @Input() type: boolean;
     @Input() data: any[];
     @Output() deleteData: EventEmitter<any>;
+    @Output() saveMultipath: EventEmitter<any>;
+    
     constructor() {
         this.deleteData = new EventEmitter();
+        this.saveMultipath = new EventEmitter();
     }
     deleteDataHandler(event) {
         this.deleteData.emit(event)
+    }
+    saveMultipathHandler(event) { 
+        this.saveMultipath.emit(event)
+        console.log("344444444444443",event)
     }
 
 }

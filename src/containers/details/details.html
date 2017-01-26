@@ -1,0 +1,6 @@
+<nav-bar [currentUser]="(user$ | async)"></nav-bar>
+
+<div class="container">
+    <h1>Post Details</h1>
+    <post-list [post]="(temp$ | async)"></post-list>
+</div>

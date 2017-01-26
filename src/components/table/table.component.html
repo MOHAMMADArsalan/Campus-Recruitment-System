@@ -1,14 +1,22 @@
 <div class="table-responsive text-center">
-    <span *ngIf="isLoading" class="glyphicon glyphicon-refresh glyphicon-spin" style="font-size: 5em;overflow: hidden"></span>
-<table *ngIf="!isLoading" class="table table-striped">
-    <thead table-header *ngIf="isCompany && data.length > 0" [isCompany]="isCompany">
+    <!--<span *ngIf="isLoading" class="glyphicon glyphicon-refresh glyphicon-spin" style="font-size: 5em;overflow: hidden"></span>-->
+<table class="table table-striped">
+    <thead table-header *ngIf="type == 'company'" [type]="type">
     </thead>
-    <tbody *ngIf="isCompany" (deleteData)="deleteDataHandler($event)" table-row [currentUser]="(currentUser$ | async)" [companylist]="data" [isCompany]="isCompany">
+    <tbody *ngIf="type == 'company'" (deleteData)="deleteDataHandler($event)" table-row [currentUser]="(currentUser$ | async)" [companylist]="data" [type]="type">
     </tbody>
-    <thead table-header *ngIf="!isCompany && data.length > 0">
+    <thead table-header *ngIf="type == 'student'" [type]="type">
     </thead>
-
-    <tbody table-row *ngIf="!isCompany" (deleteData)="deleteDataHandler($event)" [currentUser]="(currentUser$ | async)" [studentslist]="data" [isCompany]="isCompany">
+    <tbody table-row *ngIf="type == 'student'" (deleteData)="deleteDataHandler($event)" [currentUser]="(currentUser$ | async)" [studentslist]="data" [type]="type">
     </tbody>
+    <thead table-header *ngIf="type == 'posts'" [type]="type">
+    </thead>
+    <tbody table-row *ngIf="type == 'posts'" (deleteData)="deleteDataHandler($event)" [currentUser]="(currentUser$ | async)" [postslist]="data" [type]="type">
+    </tbody>
+    <thead table-header *ngIf="type == 'posts-student'" [type]="type">
+    </thead>
+    <tbody table-row *ngIf="type == 'posts-student'" (saveMultipath)="saveMultipathHandler($event)"  [currentUser]="(currentUser$ | async)" [postslist]="data" [type]="type">
+    </tbody>
+    
 </table>
 </div>
