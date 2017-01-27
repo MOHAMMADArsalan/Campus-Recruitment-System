@@ -18,8 +18,8 @@ import { Components } from "../components";
 import { AuthGuardService } from '../providers/index';
 
 export const AppRoutes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
-  , { path: "home", component: HomeContainer }
+  { path: '', redirectTo: '/signin', pathMatch: 'full' }
+  // , { path: "home", component: HomeContainer }
   , { path: "signin", component: SigninContainer }
   , { path: "signup", component: SignupContainer }
   , {
