@@ -7,9 +7,11 @@ import {
   SignupContainer,
   RootContainer,
   DashboardContainer,
-  AddCompanyContainer,
+  AddParkingContainer,
   ProfileContainer,
-  DetailsContainer
+  DetailsContainer,
+  AddSlotContainer,
+  ViewFeedBackContainer
 
 } from '../containers';
 import { Components } from "../components";
@@ -18,8 +20,8 @@ import { Components } from "../components";
 import { AuthGuardService } from '../providers/index';
 
 export const AppRoutes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
-  , { path: "home", component: HomeContainer }
+  { path: '', redirectTo: '/signin', pathMatch: 'full' }
+  // , { path: "home", component: HomeContainer }
   , { path: "signin", component: SigninContainer }
   , { path: "signup", component: SignupContainer }
   , {
@@ -28,10 +30,11 @@ export const AppRoutes: Routes = [
     canActivate: [AuthGuardService],
     children: [
       { path: "dashboard", component: DashboardContainer },
-      { path: "addcompany", component: AddCompanyContainer },
+      { path: "addparking", component: AddParkingContainer },
       { path: "profile", component: ProfileContainer },
-      { path: "post/details", component: DetailsContainer },
-
+      { path: "parking/details", component: DetailsContainer },
+      { path: "addslot", component: AddSlotContainer },
+      { path: "viewfeedback", component: ViewFeedBackContainer }
     ]
   }
 ];

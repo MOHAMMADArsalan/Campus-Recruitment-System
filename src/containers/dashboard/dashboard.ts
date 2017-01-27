@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CompanyAction, select, Observable, StudentAction } from "./../../store";
+import { ParkingAction, select, Observable, UserAction } from "./../../store";
 import { FirebaseService } from "./../../providers/firebase";
 import { Router } from "@angular/router";
 @Component({
@@ -10,45 +10,17 @@ import { Router } from "@angular/router";
 })
 
 export class DashboardContainer {
-    @select(['company', 'companies']) companies$: Observable<any>;
-    @select(['company', 'posts']) posts$: Observable<any>;
-    @select(['student', 'students']) students$: Observable<any>;
+    @select(['parking', 'parkings']) parkings$: Observable<any>;
+    @select(['parking', 'posts']) posts$: Observable<any>;
+    @select(['getFeedbacks', 'feedbacks']) feedbacks$: Observable<any>;
     @select(['auth', 'user']) user$: Observable<any>;
-    @select(['company', 'isLoading']) isLoading$: Observable<any>;
+    @select(['parking', 'isLoading']) isLoading$: Observable<any>;
     postKey: string = "";
     isPosted: boolean = false;
-    constructor(private router: Router, private ca: CompanyAction, private se: StudentAction, private fb: FirebaseService) {
+    constructor(private router: Router, private pa: ParkingAction, private ue: UserAction, private fb: FirebaseService) {
         this.user$.subscribe((user) => {
             if (Object.keys(user).length > 0) {
-                if (user.type === 1) {
-                    this.companies$.subscribe((companies) => {
-                        if (companies.length == 0) {
-                            this.ca.getCompany();
-                        }
-                    })
-                    this.students$.subscribe((students) => {
-                        if (students.length == 0) {
-                            this.se.getStudentsList();
-                        }
-                    })
-                    this.posts$.subscribe((posts) => {
-                        if (posts.length == 0) {
-                            this.ca.getPosts();
-                        }
-                    })
-                } else if (user.type === 2) {
-                    this.posts$.subscribe((posts) => {
-                        if (posts.length == 0) {
-                            this.ca.getPostByCompany(user.uid);
-                        }
-                    })
-                } else if (user.type === 3) {
-                    this.posts$.subscribe((posts) => {
-                        if (posts.length == 0) {
-                            this.ca.getPosts();
-                        }
-                    })
-                }
+                this.pa.getParking();
             } else {
                 this.router.navigate(['/signin'])
             }

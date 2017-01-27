@@ -5,14 +5,14 @@ import { createEpicMiddleware } from 'redux-observable';
 import { combineReducers } from 'redux';
 
 // Reducers
-import { authReducer, companyReducer, studentReducer } from './reducers';
+import { authReducer, parkingReducer, userReducer } from './reducers';
 // Actions
-import { AuthActions, CompanyAction, StudentAction } from './actions';
-export { AuthActions, CompanyAction, StudentAction } from './actions';
+import { AuthActions, ParkingAction, UserAction } from './actions';
+export { AuthActions, ParkingAction, UserAction } from './actions';
 
 import { HttpService } from '../providers';
 
-import { AuthEpics, CompanyEpics, StudentEpics } from './epics';
+import { AuthEpics, ParkingEpics, UserEpics } from './epics';
 
 export { Observable } from 'rxjs';
 export { select, NgRedux } from 'ng2-redux';
@@ -20,14 +20,14 @@ export { bindActionCreators } from 'redux';
 
 export interface IAppState {
   auth?: Object;
-  company?: Object;
-  student?: Object;
+  parking?: Object;
+  feedback?: Object;
 }
 
 export const AppReducer = combineReducers<IAppState>({
   auth: authReducer,
-  company: companyReducer,
-  student: studentReducer
+  parking: parkingReducer,
+  feedback: userReducer
 });
 
 
@@ -35,12 +35,12 @@ export const AppReducer = combineReducers<IAppState>({
   providers: [
     // actions
     AuthActions,
-    CompanyAction,
-    StudentAction
+    ParkingAction,
+    UserAction
     // epics
     , AuthEpics
-    , CompanyEpics
-    , StudentEpics
+    , ParkingEpics
+    , UserEpics
     // other services
     , HttpService
   ]
@@ -50,20 +50,20 @@ export class StoreModule {
     private ngRedux: NgRedux<IAppState>,
     private devTool: DevToolsExtension,
     private ae: AuthEpics,
-    private ce: CompanyEpics,
-    private se: StudentEpics
+    private pe: ParkingEpics,
+    private ue: UserEpics
   ) {
     const middleware = [
       createEpicMiddleware(this.ae.register),
       createEpicMiddleware(this.ae.login),
-      createEpicMiddleware(this.ce.getCompanies),
-      createEpicMiddleware(this.se.getStudents),
+      createEpicMiddleware(this.pe.getParkingLocation),
+      createEpicMiddleware(this.ue.getFeedbacks),
       createEpicMiddleware(this.ae.isLoggedIn),
       createEpicMiddleware(this.ae.getUserInfo),
       createEpicMiddleware(this.ae.logout),
-      createEpicMiddleware(this.ce.getCompanyPost),
-      createEpicMiddleware(this.ce.getPosts),
-      createEpicMiddleware(this.ce.getOneCompanyPost)
+      createEpicMiddleware(this.pe.getParkingDetailByUser),
+      createEpicMiddleware(this.pe.getOneParkingData),
+      // createEpicMiddleware(this.ce.getOneCompanyPost)
     ];
     this.ngRedux.configureStore(
       AppReducer,                                         // Main Reducer

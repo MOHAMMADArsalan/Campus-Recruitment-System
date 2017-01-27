@@ -9,10 +9,8 @@ declare var $: any;
 })
 
 export class DashboardComponent {
-    @Input() companies: any;
+    @Input() parkings: any;
     @Input() isLoading: boolean;
-    @Input() students: any;
-    @Input() posts: any;
     @Input() currentUser: any;
     @Input() postPushKey: string;
     @Input() isPosted: string;
@@ -25,7 +23,7 @@ export class DashboardComponent {
         this.deleteData = new EventEmitter();
         this.getPostPushKey = new EventEmitter();
         this.saveMultipath = new EventEmitter();
-    }
+    } 
     ngOnChanges(Changes: any) {
         if (Changes.isPosted && Changes.isPosted.currentValue) {
             $("#myModal").modal('hide');
@@ -44,7 +42,7 @@ export class DashboardComponent {
     Changes() {
         this.getPostPushKey.emit(this.currentUser.auth.uid)
     }
-    saveMultipathHandler(event: Object) {
+    saveMultipathEventHandler(event: Object) {
         this.saveMultipath.emit(event)
     }
 }

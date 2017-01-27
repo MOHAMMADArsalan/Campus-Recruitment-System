@@ -1,3 +1,3 @@
 export { AuthActions } from './auth';
-export { CompanyAction } from "./company";
-export { StudentAction } from "./student";
+export { ParkingAction } from "./parking";
+export { UserAction } from "./user";

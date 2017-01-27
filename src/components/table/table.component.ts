@@ -11,8 +11,6 @@ declare var require: any;
 export class TableComponent {
 
     @select(['auth', 'user']) currentUser$: Observable<any>;
-    @Input() isLoading: boolean;
-    @Input() type: boolean;
     @Input() data: any[];
     @Output() deleteData: EventEmitter<any>;
     @Output() saveMultipath: EventEmitter<any>;

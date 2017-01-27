@@ -3,18 +3,22 @@ import { SigninContainer } from './signin/signin';
 import { SignupContainer } from './signup/signup';
 import { RootContainer } from './root/root';
 import { DashboardContainer } from "./dashboard/dashboard";
-import { AddCompanyContainer } from "./addcompany/addcompany";
-import { ProfileContainer } from "./profile/profile"
-import { DetailsContainer } from "./details/details"
+import { AddParkingContainer } from "./addparking/addparking";
+import { ProfileContainer } from "./profile/profile";
+import { DetailsContainer } from "./details/details";
+import { AddSlotContainer } from "./addslot/addslot";
+import { ViewFeedBackContainer } from "./viewfeedback/viewfeedback"
 export const Containers: any[] = [
     HomeContainer
     , SigninContainer
     , SignupContainer
     , RootContainer
     , DashboardContainer
-    , AddCompanyContainer
+    , AddParkingContainer
     , ProfileContainer
     , DetailsContainer
+    , AddSlotContainer
+    , ViewFeedBackContainer
 
 ]
 
@@ -24,8 +28,11 @@ export {
     , SignupContainer
     , RootContainer
     , DashboardContainer
-    , AddCompanyContainer
+    , AddParkingContainer
     , ProfileContainer
     , DetailsContainer
+    , AddSlotContainer
+    , ViewFeedBackContainer
+
 
 }

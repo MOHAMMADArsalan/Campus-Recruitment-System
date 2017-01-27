@@ -1,16 +1,22 @@
-<tr *ngFor="let company of companylist;let i = index">
+<tr *ngFor="let detail of postDetail;let i = index">
+    <td>{{i + 1}}</td>
+    <td>{{detail['slot']}}</td>
+    <td>{{detail['location']}}</td>
+    <td>{{detail['start-time'] | date:'medium'}}</td>
+    <td>{{detail['end-time']  | date:'medium' }}</td>
+    <td><button class="btn btn-danger" (click)="delete(detail['$key'],detail['location'],detail['slot'])"><i class="glyphicon glyphicon-trash"></i> Delete</button></td>
+</tr>
+<!--<tr *ngFor="let company of companylist;let i = index">
     <td>{{i + 1}}</td>
     <td>{{company['name']}}</td>
     <td>{{company['address']}}</td>
     <td>{{company['email']}}</td>
-    <!--<td><button class="btn btn-danger" (click)="delete(company['$key'],'company')"><i class="glyphicon glyphicon-trash"></i> Delete</button></td>-->
 </tr>
 <tr *ngFor="let student of studentslist;let i = index">
     <td>{{i + 1}}</td>
     <td>{{student['firstname']}}</td>
     <td>{{student['lastname']}}</td>
     <td>{{student['email']}}</td>
-    <!--<td><button class="btn btn-danger" (click)="delete(student['$key'],'student')"><i class="glyphicon glyphicon-trash"></i> Delete</button></td>-->
 </tr>
 <tr *ngFor="let post of postslist;let i = index">
     <td>{{i + 1}}</td>
@@ -31,4 +37,4 @@
         <a routerLink="/post/details" [queryParams]="{postId :post['$key'], id: post['created-by'] }">View Details</a>
     </td>
     <td *ngIf="type !== 'posts-student'"><button class="btn btn-danger" (click)="delete(post['$key'],post['created-by'],'post')"><i class="glyphicon glyphicon-trash"></i> Delete</button></td>
-</tr>
+</tr>-->

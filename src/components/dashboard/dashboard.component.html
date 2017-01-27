@@ -1,38 +1,10 @@
-<div class="container" *ngIf="currentUser.type == 1">
-    <h1>List</h1>
-    <ul class="nav nav-tabs nav-justified">
-        <li role=presentation class="active" (click)="showData('company')"><a href="#tab1" data-toggle="tab">Companies List</a></li>
-        <li role=presentation (click)="showData('students')"><a href="#tab2" data-toggle="tab">Students List</a></li>
-        <li role=presentation (click)="showData('posts')"><a href="#tab3" data-toggle="tab">Posts List</a></li>
-    
-    </ul>
-    <div class="container marginTop20px">
-        <div class="row text-center">
-            <div class="tab-content clearfix">
-                <div class="tab-pane active" id="tab1" *ngIf="tab == 'company'">
-                        <data-table [data]="companies" (deleteData)="delete($event)" [isLoading]="isLoading" [type]="'company'"></data-table>
-                    </div>
-                    <div class="tab-pane" id="tab2" *ngIf="tab == 'students'">
-                        <data-table [data]="students" (deleteData)="delete($event)" [isLoading]="isLoading" [type]="'student'"></data-table>
-                    </div>
-                    <div class="tab-pane active" id="tab3" *ngIf="tab == 'posts'">
-                        <data-table [data]="posts" (deleteData)="delete($event)" [isLoading]="isLoading" [type]="'posts'"></data-table>
-                    </div>
+
+<div class="container">
+    <button type="button" (click)="Changes();isShow = true" class="btn btn-primary  pull-right height35px marginTop20px" data-toggle="modal"
+        data-target="#myModal">Feedback..</button>
+    <br>
+    <br>
+    <br>
+    <parking-list [locations]="parkings" [currentUser]="currentUser" (saveMultipathEvent)="saveMultipathEventHandler($event)"></parking-list>
 </div>
-</div>
-</div>
-</div>
-<div class="container" *ngIf="currentUser.type == 3">
-    <h1>POST LIST </h1>
-    <data-table [data]="posts" (deleteData)="delete($event)" (saveMultipath)="saveMultipathHandler($event)" [isLoading]="isLoading"
-        [type]="'posts-student'"></data-table>
-</div>
-<div class="container" *ngIf="currentUser.type == 2">
-    <div class="flex">
-        <h1>POST LIST</h1>
-        <button type="button" (click)="Changes();isShow = true" class="btn btn-primary height35px marginTop20px" data-toggle="modal"
-            data-target="#myModal">ADD POST</button>
-    </div>
-    <data-table [data]="posts" (deleteData)="delete($event)" [isLoading]="isLoading" [type]="'posts'"></data-table>
-</div>
-<modal *ngIf="isShow" [currentUser]="currentUser" [pushKey]="postPushKey" (saveMultipath)="saveMultipathHandler($event)"></modal>
+<modal *ngIf="isShow" [currentUser]="currentUser" [pushKey]="postPushKey" (saveMultipath)="saveMultipathEventHandler($event)"></modal>

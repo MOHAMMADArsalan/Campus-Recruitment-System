@@ -1,0 +1,5 @@
+<nav-bar [currentUser]="(user$ | async)"></nav-bar>
+<div class="container">
+    <view-feedback [feedbackList]="(feedbacks$ | async)" (deleteFeedback)="deleteFeedback($event)"></view-feedback>
+    <!--<pre>{{(feedbacks$ | async) | json}}</pre>-->
+</div>

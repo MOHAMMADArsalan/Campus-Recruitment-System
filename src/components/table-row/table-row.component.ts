@@ -9,11 +9,7 @@ import { FirebaseService } from "./../../providers"
 export class TableRowComponent {
     date: Date;
     @Input() currentUser: any;
-    @Input() companylist: any[];
-    @Input() studentslist: any[];
-    @Input() postslist: any[];
-
-    @Input() type: string;
+    @Input() postDetail: any[];
     @Output() deleteData: EventEmitter<any>;
     @Output() saveMultipath: EventEmitter<any>;
     constructor(private fb: FirebaseService) {
@@ -24,28 +20,17 @@ export class TableRowComponent {
     keys(object) {
         return object ? Object.keys(object) : [];
     }
-    delete(key, id, type) {
+    delete(key, location, slotId) {
+        let slot = slotId.split(" ")[1];
         let multipath = {};
-        multipath[`posts/${key}`] = null;
-        multipath[`company-posts/${id}/${key}`] = null;
+        multipath[`user-parking/${this.currentUser.auth.uid}/${key}`] = null;
+        multipath[`parking-location/${location}/${slot}/booked-by`] = "";
+        multipath[`parking-location/${location}/${slot}/end-time`] = "";
+        multipath[`parking-location/${location}/${slot}/start-time`] = "";
+        multipath[`parking-location/${location}/${slot}/status`] = 0;
+        multipath[`parking-location/${location}/${slot}/key`] = "";
+        
+        console.log("delete",multipath)
         this.deleteData.emit(multipath)
-    }
-    apply(key: string, companyId: string, count) {
-        if (this.currentUser.status) {
-            let multipath = {};
-            let userObj = {};
-            userObj['email'] = this.currentUser.email;
-            userObj['name'] = this.currentUser.name;
-            userObj['firstname'] = this.currentUser.firstname;
-            userObj['lastname'] = this.currentUser.lastname;
-            userObj['uid'] = this.currentUser.auth.uid;
-
-            multipath[`posts/${key}/applied/${this.currentUser.auth.uid}`] = userObj;
-            multipath[`company-posts/${companyId}/${key}/applied-count`] = count + 1;
-            multipath[`company-posts/${companyId}/${key}/applied/${this.currentUser.auth.uid}`] = userObj
-            multipath[`posts/${key}/applied-count`] = count + 1;
-
-            this.saveMultipath.emit(multipath);
-        }
     }
 }

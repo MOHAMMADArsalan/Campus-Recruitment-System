@@ -1,0 +1,12 @@
+<div class="container">
+    <h1>Feedback List</h1>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="panel panel-default fadeInDown" *ngFor="let feed of feedbackList">
+            <div class="panel-body">
+                <p><strong>Email: <a [href]="'mailto:' + feed['email']">{{feed['email']}}</a></strong></p>
+                <p class="flex"><b>Name: {{feed['name']}}</b> <button class="btn btn-danger" (click)="delete(feed['$key'])"><i class="glyphicon glyphicon-trash"></i> delete</button></p>
+                <p [innerHTML]="feed['feedback']"></p>
+            </div>
+        </div>
+    </div>
+</div>

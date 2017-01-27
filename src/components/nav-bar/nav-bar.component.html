@@ -15,8 +15,10 @@
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li routerLinkActive="active"><a routerLink="/dashboard">Dashboard</a></li>
-                        <li routerLinkActive="active" *ngIf="currentUser.type === 1"><a routerLink="/addcompany">Add Company</a></li>
-                        <li routerLinkActive="active" *ngIf="currentUser.type !== 1"><a routerLink="/profile">Profile</a></li>
+                        <li routerLinkActive="active" *ngIf="currentUser.type === 1"><a routerLink="/addparking">Add Parking</a></li>
+                        <li routerLinkActive="active" *ngIf="currentUser.type === 1"><a routerLink="/viewfeedback">View Feedback</a></li>
+                        
+                        <li routerLinkActive="active" *ngIf="currentUser.type !== 1"><a routerLink="/parking/details">View Parking Detail</a></li>
                         <li (click)="Logout()" class="cursor"><a >Logout</a></li>
                     </ul>
                 </div>

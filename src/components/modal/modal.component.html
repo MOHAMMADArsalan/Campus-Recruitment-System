@@ -7,30 +7,12 @@
                 <h4 class="modal-title">
                 </h4>
             </div>
-            <form class="col-sm-12" [formGroup]="postForm" (ngSubmit)="onSubmit(postForm)">
+            <form class="col-sm-12">
                 <div class="modal-body">
-                    <div [ngClass]="{'has-error': !postForm.controls['title'].valid && postForm.controls['title'].touched}">
-                        <label for="title">Title</label><br>
-                        <input type="text" name="title" id="title" class="form-control" formControlName="title" placeholder="Enter Title here.."
-                            required autofocus>
-                        <span class="marginTop10px" *ngIf="postForm.controls['title'].hasError('required') && postForm.controls['title'].touched">Title is Required </span>
-                    </div>
-                    <br />
-                    <div [ngClass]="{'has-error': !postForm.controls['desc'].valid && postForm.controls['desc'].touched}">
-                        <label for="desc">Description</label><br>
-                        <input type="text" name="desc" id="desc" class="form-control" formControlName="desc" placeholder="Enter Description here.."
-                            required>
-                        <span class="marginTop10px" *ngIf="postForm.controls['desc'].hasError('required') && postForm.controls['desc'].touched">Description is Required </span>
-                    </div>
-                    <br />
-                    <div [ngClass]="{'has-error': !postForm.controls['salary'].valid && postForm.controls['salary'].touched}">
-                        <label for="salary">Salary</label><br>
-                        <input type="number" name="salary" id="salary" class="form-control" formControlName="salary" placeholder="Enter Salary here.."
-                            required>
-                        <span class="marginTop10px" *ngIf="postForm.controls['salary'].hasError('required') && postForm.controls['salary'].touched">Salary is Required </span>
-                    </div>
-                    <br />
-                    <button class="btn btn-primary pull-right" type="submit" [disabled]="(!postForm.valid)">Post</button>
+                    <label for="Feedback">Feedback</label><br>
+                    <textarea style="width: 100%;
+    resize: none;" name="" #feedback id="Feedback" cols="30" rows="10" placeholder="Please Enter Your Feedback Here....."></textarea>
+                    <button class="btn btn-primary pull-right" type="button" (click)="onSubmit(feedback)">Feedback</button>
                 </div>
             </form>
             <div class="modal-footer"></div>

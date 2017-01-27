@@ -1,0 +1,124 @@
+// checkBoxes css ##############
+.toggle-button--vesi label {
+    height: 50px;
+    line-height: 50px;
+    transition: all 0.2s;
+    border-radius: 2rem;
+}
+
+.toggle-button {
+    margin: 0 10px;
+}
+
+.toggle-button {
+    position: relative;
+    display: inline-block;
+    color: #fff;
+}
+
+.toggle-button label {
+    display: inline-block;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: left;
+}
+
+.toggle-button input {
+    display: none;
+}
+
+.toggle-button__icon {
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.toggle-button__icon:before,
+.toggle-button__icon:after {
+    content: "";
+    position: absolute;
+    top: 45%;
+    left: 35%;
+    transition: 0.2s ease-out;
+}
+
+.toggle-button--vesi label:before,
+.toggle-button--vesi label:after {
+    position: absolute;
+    right: 1.5rem;
+    transition: all 0.2s .15s ease-out;
+}
+
+.toggle-button--vesi label:before {
+    content: attr(data-on-text);
+}
+
+.toggle-button--vesi label:after {
+    content: attr(data-off-text);
+}
+
+.toggle-button--vesi input[type=checkbox]+label {
+    width: 150px;
+    background: #FF5335;
+}
+
+.toggle-button--vesi input[type=checkbox]+label:before {
+    opacity: 0;
+    transform: translate(0, 20px);
+}
+
+.toggle-button--vesi input[type=checkbox]+label:after {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+.toggle-button--vesi input[type=checkbox]:checked~label {
+    // width: 180px;
+    background: #61B136;
+}
+
+.toggle-button--vesi input[type=checkbox]:checked~label:before {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+.toggle-button--vesi input[type=checkbox]:checked~label:after {
+    opacity: 0;
+    transform: translate(0, -20px);
+}
+
+.toggle-button--vesi input[type=checkbox]:checked~.toggle-button__icon:before {
+    transform: translate(-10%, 100%) rotate(45deg);
+    width: 16.66667px;
+}
+
+.toggle-button--vesi input[type=checkbox]:checked~.toggle-button__icon:after {
+    transform: translate(30%) rotate(-45deg);
+}
+
+.toggle-button--vesi .toggle-button__icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 50px;
+    width: 50px;
+}
+
+.toggle-button--vesi .toggle-button__icon:before,
+.toggle-button--vesi .toggle-button__icon:after {
+    height: 3px;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.toggle-button--vesi .toggle-button__icon:before {
+    width: 25px;
+    transform: rotate(90deg);
+}
+
+.toggle-button--vesi .toggle-button__icon:after {
+    width: 25px;
+    transform: rotate(0);
+}
+
+// checkBoxes css END ##############

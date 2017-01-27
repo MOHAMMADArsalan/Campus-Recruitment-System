@@ -14,36 +14,19 @@ export class AuthEpics {
       .switchMap(({payload}): any => {
         return this.af.auth.createUser({ email: payload.email, password: payload.password }).then((response) => {
           let multipath = {};
-          if (payload.type === 2) {
-            delete payload['password'];
-            multipath[`companies/${response.uid}`] = payload;
-            multipath[`users/${response.uid}`] = payload;
-            return this.fb.saveMultipath(multipath).then(() => {
-              return {
-                type: AuthActions.SIGN_UP_SUCCESS,
-                payload: response
-              };
-            }, (err) => {
-              return {
-                type: AuthActions.SIGN_UP_FAIL,
-                payload: { isError: { status: false, msg: err.message } }
-              };
-            });
-          } else {
-            let users = this.af.database.object(`users/${response.uid}`);
-            delete payload['password'];
-            return users.set(payload).then(() => {
-              return {
-                type: AuthActions.SIGN_UP_SUCCESS,
-                payload: response
-              };
-            }, (err) => {
-              return {
-                type: AuthActions.SIGN_UP_FAIL,
-                payload: { isError: { status: false, msg: err.message } }
-              };
-            });
-          }
+          let users = this.af.database.object(`users/${response.uid}`);
+          delete payload['password'];
+          return users.set(payload).then(() => {
+            return {
+              type: AuthActions.SIGN_UP_SUCCESS,
+              payload: response
+            };
+          }, (err) => {
+            return {
+              type: AuthActions.SIGN_UP_FAIL,
+              payload: { isError: { status: false, msg: err.message } }
+            };
+          });
         }, (err) => {
           return {
             type: AuthActions.SIGN_UP_FAIL,
@@ -113,94 +96,6 @@ export class AuthEpics {
           });
         }
       });
-
-  // getCurrentUserData = (action$) =>
-  //   action$.ofType(AuthActions.LOGIN_SUCCESS)
-  //     .switchMap(({payload}) => this.af.database.object(`users/${payload.userID}`)
-  //       .catch(err => {
-  //         console.log('users/ err ', err);
-  //         return Observable.of(null)
-  //       })
-  //       .switchMap((user) => {
-  //         if (user) {
-  //           // console.log("Login", user);     
-  //           return Observable.of({
-  //             type: AuthActions.SETCURRENTUSERDATA,
-  //             payload: user
-  //           });
-  //         } else {
-  //           return Observable.of({
-  //             type: AuthActions.NULL
-  //           });
-  //         }
-  //       }));
-
-  // UseCheckedIn = (action$) =>
-  //   action$.ofType(AuthActions.LOGIN_SUCCESS)
-  //     .switchMap(({payload}) => {
-  //       return this.af.database.object(`subgroup-check-in-current-by-user/${payload.userID}`)
-  //         .catch(err => {
-  //           return Observable.of(null)
-  //         })
-  //         .map((checkedInObject) => {
-  //           if (checkedInObject && checkedInObject.type == 1) {
-  //             return {
-  //               type: AuthActions.USERCHECKEDIN_SUCCESS,
-  //               payload: checkedInObject
-  //             };
-  //           } else {
-  //             return {
-  //               type: AuthActions.USERCHECKEDIN_FAIL
-  //             };
-  //           }
-  //         })
-  //     }); firebase
-
-  // UserOnline = (action$) =>
-  //   action$.ofType(AuthActions.LOGIN_SUCCESS)
-  //     .switchMap(() => this.af.database.object('.info/connected')
-  //       .catch(err => {
-  //         return Observable.of(null)
-  //       })
-  //       .switchMap((snapshot) => {
-  //         let pushKey = null;
-  //         if (snapshot && snapshot['$value'] == true && snapshot['$key'] == 'connected') {
-  //           let userID = this.getLocalStorage().userID;
-  //           // is online
-  //           this.af.database.list('users-presence/' + this.getLocalStorage().userID + '/connections').push({})
-  //             .then((item) => {
-  //               pushKey = item.key;
-  //               // console.log('key: ', pushKey);
-
-  //               // update/add user-presence object
-  //               let multipath = {}
-  //               multipath[userID + "/last-modified"] = firebase.database['ServerValue'].TIMESTAMP;
-  //               multipath[userID + "/defined-status"] = 1;
-  //               multipath[userID + "/connections/" + item.key + "/type"] = 1;
-  //               multipath[userID + "/connections/" + item.key + "/started"] = firebase.database['ServerValue'].TIMESTAMP;
-  //               multipath[userID + "/connections/" + item.key + "/machineTitle"] = 'web';
-
-  //               firebase.database().ref('/').child('users-presence').update(multipath);
-
-  //               firebase.database().ref('/').child('users-presence/' + userID).onDisconnect().update({
-  //                 'last-modified': firebase.database['ServerValue'].TIMESTAMP,
-  //                 'defined-status': 0
-  //               });
-
-  //               firebase.database().ref('/').child('users-presence/' + userID + '/connections/' + item.key).onDisconnect().remove();
-
-  //             }); // persence.push
-
-  //           return Observable.of({
-  //             type: AuthActions.USERONLINE_SUCCESS
-  //           });
-  //         } else {
-  //           return Observable.of({
-  //             type: AuthActions.USERONLINE_FAIL
-  //           });
-  //         }
-  //       }));
-
   private setLocalStorage(userObj): void {
     localStorage.setItem('campus-recruitment-system', JSON.stringify(userObj));
   }

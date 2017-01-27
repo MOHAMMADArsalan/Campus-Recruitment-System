@@ -1,3 +1,3 @@
 export { authReducer } from './auth';
-export { companyReducer } from "./company";
-export { studentReducer } from "./student";
+export { parkingReducer } from "./parking";
+export { userReducer } from "./user";

@@ -1,16 +1,24 @@
 <div class="panel-group" id="accordion">
-    <div class="panel panel-default" *ngFor="let user of keys(post.applied)">
+    <div class="panel panel-default" *ngFor="let location of keys(locations)">
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" [href]="'#collapse' + i">
-                {{post.applied[user]['name']}}</a>
+                {{location}}
+                </a>
             </h4>
         </div>
         <div [id]="'#collapse' + i" class="panel-collapse collapse in">
             <div class="panel-body">
                 <ul class="list-group">
-                    <li class="list-group-item">Name: {{post.applied[user]['firstname'] + " " + post.applied[user]['lastname']}}</li>
-                    <li class="list-group-item">Email: {{post.applied[user]['email']}}</li>
+                    <li class="list-group-item list-item" *ngFor="let slot of locations[location];let i = index">Name: {{slot['name']}}
+                        <span>
+                            <button class="btn btn-primary" [disabled]="(slot['status'] && slot['booked-by'] != currentUser.auth.uid)" *ngIf="slot['status'] && (slot['booked-by'] == currentUser.auth.uid || currentUser.type == 1)">Booked <i class="glyphicon glyphicon-ok"></i></button>
+                            <button class="btn btn-danger" (click)="delete(location,i,slot['booked-by'],slot['key'])" *ngIf="slot['status'] && currentUser.type == 1"><i class="glyphicon glyphicon-trash"></i></button>
+                            
+                        </span>
+                        <button class="btn btn-primary" routerLink="/addslot" [queryParams]="{location: location,slot:'slot' + i}"
+                            *ngIf="(currentUser.type != 1 && slot['booked-by'] != currentUser.auth.uid)">Apply For Booking</button></li>
+                    <!--<li class="list-group-item">Email: {{post.applied[user]['email']}}</li>-->
                 </ul>
             </div>
         </div>

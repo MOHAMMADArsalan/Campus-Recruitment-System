@@ -10,11 +10,11 @@ export class AppConfig {
         if (env === 'dev') {
             this.config = {
                 'firebaseConfig': {
-                    apiKey: "AIzaSyDt4iyN5Z7R3ipQH-niVxU6datrLfgWcmg",
-                    authDomain: "campus-recruitment-system.firebaseapp.com",
-                    databaseURL: "https://campus-recruitment-system.firebaseio.com",
-                    storageBucket: "campus-recruitment-system.appspot.com",
-                    messagingSenderId: "837785737302"
+                   apiKey: "AIzaSyCOlUbw1Ri-9T4s_SY2RXcbU9XcmSWx570",
+                   authDomain: "parking-system-11d64.firebaseapp.com",
+                   databaseURL: "https://parking-system-11d64.firebaseio.com",
+                   storageBucket: "parking-system-11d64.appspot.com",
+                   messagingSenderId: "333338831728"
                 },
                 firebaseAuthConfig: { provider: AuthProviders.Password, method: AuthMethods.Password }
             };

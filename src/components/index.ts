@@ -7,6 +7,8 @@ import { TableHeaderComponent } from "./table-header/table-header.component";
 import { TableRowComponent } from "./table-row/table-row.component";
 import { ModalComponent } from "./modal/modal.component";
 import { PostListComponent } from "./post-list/post-list";
+import { AddSlotComponent } from "./addslot/addslot.component";
+import { ViewFeedBackComponent  } from "./viewfeedback/viewfeedback"
 export const Components: any[] = [
     NavLoginComponent,
     NavBarComponent,
@@ -16,7 +18,9 @@ export const Components: any[] = [
     TableHeaderComponent,
     TableRowComponent,
     ModalComponent,
-    PostListComponent
+    PostListComponent,
+    AddSlotComponent,
+    ViewFeedBackComponent
 ]
 
 export {
@@ -28,5 +32,7 @@ export {
     TableHeaderComponent,
     TableRowComponent,
     ModalComponent,
-    PostListComponent
+    PostListComponent,
+    AddSlotComponent,
+    ViewFeedBackComponent
 }

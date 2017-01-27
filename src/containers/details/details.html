@@ -1,6 +1,6 @@
 <nav-bar [currentUser]="(user$ | async)"></nav-bar>
-
 <div class="container">
-    <h1>Post Details</h1>
-    <post-list [post]="(temp$ | async)"></post-list>
+    <h1>Parking Details</h1>
+    <data-table [data]="(postDetail$ | async)" (deleteData)="deleteDataHandler($event)"></data-table>
+    <!--<post-list [post]="(temp$ | async)"></post-list>-->
 </div>

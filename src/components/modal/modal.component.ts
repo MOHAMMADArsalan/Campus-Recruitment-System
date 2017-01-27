@@ -25,19 +25,19 @@ export class ModalComponent {
 
     }
     onSubmit(form: any) {
-        if (form.valid) {
+        if (form.value) {
             let multipath = {};
-            let Obj = form.value;
-            Obj['applied-count'] = 0;
+            let Obj = {};
+            Obj['feedback'] = form.value;
             Obj['timestamp'] = this.fb.firebaseTimeStamp;
-            Obj['name'] = this.currentUser.name;
-            Obj['address'] = this.currentUser.address;
+            Obj['name'] = this.currentUser.firstname + " " + this.currentUser.lastname;
+            Obj['feedback-by'] = this.currentUser.auth.uid;
             Obj['email'] = this.currentUser.email;
-            Obj['applied'] = "";
-            multipath[`company-posts/${this.currentUser.auth.uid}/${this.pushKey}`] = Obj;
-            let newObj = Object.assign({}, Obj);
-            newObj['created-by'] = this.currentUser.auth.uid;
-            multipath[`posts/${this.pushKey}`] = newObj;
+            multipath[`feedback/${this.pushKey}`] = Obj;
+            // multipath[`company-posts/${this.currentUser.auth.uid}/${this.pushKey}`] = Obj;
+            // let newObj = Object.assign({}, Obj);
+            // newObj['created-by'] = this.currentUser.auth.uid;
+            // multipath[`posts/${this.pushKey}`] = newObj;
             this.saveMultipath.emit(multipath);
         }
     }
