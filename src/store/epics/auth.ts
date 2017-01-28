@@ -97,15 +97,15 @@ export class AuthEpics {
         }
       });
   private setLocalStorage(userObj): void {
-    localStorage.setItem('campus-recruitment-system', JSON.stringify(userObj));
+    localStorage.setItem('online-parking-system', JSON.stringify(userObj));
   }
 
   private clearLocalStorage(): void {
-    localStorage.removeItem('campus-recruitment-system');
+    localStorage.removeItem('online-parking-system');
   }
 
   private getLocalStorage() {
-    return JSON.parse(localStorage.getItem('campus-recruitment-system'));
+    return JSON.parse(localStorage.getItem('online-parking-system'));
   }
 
 

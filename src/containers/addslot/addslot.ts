@@ -9,6 +9,8 @@ import { Router } from "@angular/router";
 export class AddSlotContainer {
     @select(['auth', 'user']) user$: Observable<any>;
     @select(['parking', 'temp']) temp$: Observable<any>;
+    @select(['parking', 'avail']) avail$: Observable<any>;
+    
     
     @Input() pushKey: string;
     constructor(private fb: FirebaseService, private router: Router) { }

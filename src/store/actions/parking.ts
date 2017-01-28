@@ -18,6 +18,10 @@ export class ParkingAction {
     static GET_ONE_PARKING_DATA_SUCCESS: string = 'GET_ONE_PARKING_DATA_SUCCESS';
     static GET_ONE_PARKING_DATA_FAIL: string = 'GET_ONE_PARKING_DATA_FAIL';
 
+    static GET_PARKING_LOCATION_AVAILABLITY: string = 'GET_PARKING_LOCATION_AVAILABLITY';
+    static GET_PARKING_LOCATION_AVAILABLITY_SUCCESS: string = 'GET_PARKING_LOCATION_AVAILABLITY_SUCCESS';
+    static GET_PARKING_LOCATION_AVAILABLITY_FAIL: string = 'GET_PARKING_LOCATION_AVAILABLITY_FAIL';
+
     constructor(private ngRedux: NgRedux<IAppState>, private af: AngularFire) { }
     getParking() {
         this.ngRedux.dispatch({
@@ -34,6 +38,12 @@ export class ParkingAction {
         this.ngRedux.dispatch({
             type: ParkingAction.GET_ONE_PARKING_DATA,
             payload: { locationId, slotId }
+        })
+    }
+    getParkingAvailablity(locationId: string, slotId: string, date: string) {
+        this.ngRedux.dispatch({
+            type: ParkingAction.GET_PARKING_LOCATION_AVAILABLITY,
+            payload: { locationId, slotId, date }
         })
     }
 }

@@ -4,7 +4,9 @@
     <td>{{detail['location']}}</td>
     <td>{{detail['start-time'] | date:'medium'}}</td>
     <td>{{detail['end-time']  | date:'medium' }}</td>
-    <td><button class="btn btn-danger" (click)="delete(detail['$key'],detail['location'],detail['slot'])"><i class="glyphicon glyphicon-trash"></i> Delete</button></td>
+    <td><button class="btn btn-danger" (click)="delete(detail['$key'],detail['location'],detail['slot'],detail['date'])"><i class="glyphicon glyphicon-trash"></i> Delete</button></td>
+    <td><button class="btn btn-primary" (click)="printScreen()"> Print</button></td>
+    
 </tr>
 <!--<tr *ngFor="let company of companylist;let i = index">
     <td>{{i + 1}}</td>

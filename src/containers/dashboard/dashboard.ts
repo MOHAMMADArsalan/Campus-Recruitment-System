@@ -11,6 +11,8 @@ import { Router } from "@angular/router";
 
 export class DashboardContainer {
     @select(['parking', 'parkings']) parkings$: Observable<any>;
+    @select(['parking', 'avail']) avail$: Observable<any>;
+    
     @select(['parking', 'posts']) posts$: Observable<any>;
     @select(['getFeedbacks', 'feedbacks']) feedbacks$: Observable<any>;
     @select(['auth', 'user']) user$: Observable<any>;

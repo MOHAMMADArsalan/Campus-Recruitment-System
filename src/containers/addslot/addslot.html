@@ -1,5 +1,5 @@
 <nav-bar [currentUser]="(user$ | async)"></nav-bar>
 <div class="container">
     <h1>Add Slot</h1>
-    <add-slot [temp]="(temp$ | async)" [pushKey]="pushKey" (getPushKey)="getPushKeyHandler($event)" [currentUser]="(user$ | async)" (saveMultipathEvent)="saveMultipathEvent($event)"></add-slot>
+    <add-slot [avail]="(avail$ | async)" [temp]="(temp$ | async)" [pushKey]="pushKey" (getPushKey)="getPushKeyHandler($event)" [currentUser]="(user$ | async)" (saveMultipathEvent)="saveMultipathEvent($event)"></add-slot>
 </div>

@@ -10,7 +10,7 @@ export class AuthGuardService implements CanActivate {
     constructor(private router: Router, private af: AngularFire) { }
 
     canActivate() {
-        if (localStorage.getItem("campus-recruitment-system")) {
+        if (localStorage.getItem("online-parking-system")) {
             return true;
         } else {
             this.router.navigate(['/signin']);

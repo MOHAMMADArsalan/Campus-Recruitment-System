@@ -1,3 +1,4 @@
 <nav-bar [currentUser]="(user$ | async)"></nav-bar>
-<dashboard-component [isPosted]="isPosted" (saveMultipath)="saveMultipath($event)" [postPushKey]="postKey" (getPostPushKey)="getPostPushKey($event)"
+<!--<router-outlet></router-outlet>-->
+<dashboard-component  [isPosted]="isPosted" (saveMultipath)="saveMultipath($event)" [postPushKey]="postKey" (getPostPushKey)="getPostPushKey($event)"
     [currentUser]="(user$ | async)" [parkings]="(parkings$ | async)" [isLoading]="(isLoading$ | async)" (deleteData)="saveMultipath($event)"></dashboard-component>

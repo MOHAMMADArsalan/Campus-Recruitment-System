@@ -63,7 +63,7 @@ export class StoreModule {
       createEpicMiddleware(this.ae.logout),
       createEpicMiddleware(this.pe.getParkingDetailByUser),
       createEpicMiddleware(this.pe.getOneParkingData),
-      // createEpicMiddleware(this.ce.getOneCompanyPost)
+      createEpicMiddleware(this.pe.getParkingAvailablity)
     ];
     this.ngRedux.configureStore(
       AppReducer,                                         // Main Reducer

@@ -7,21 +7,22 @@
     <form [formGroup]="bookSlotForm" (ngSubmit)="submitForm(bookSlotForm.value)" novalidate>
         <div class="form-group">
             <label for="date" class="col-sm-2 control-label">Select Date</label>
-            <input id="date" type="date" class="form-control" formControlName="date" >
+            <input id="date" type="date" class="form-control" formControlName="date" [ngModel]="date" (ngModelChange)="checkAvail($event,'date')">
         </div>
         <div class="form-inline form-group">
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{'has-error': invalid}">
                 <label for="hours">Start Hours:</label>
-                <select id="hours" class="form-control" formControlName="startHours">
-                <option *ngFor="let hour of hours" value="{{hour}}" [disabled]="temp.startHours == i || i <= temp.selectHours">{{hour}} :00</option>
+                <select id="hours" class="form-control" name="hour" formControlName="startHours" [ngModel]="hour" (ngModelChange)="checkAvail($event,'hour')">
+                <option *ngFor="let hour of hours" value="{{hour}}" >{{hour}} :00</option>
             </select>
             </div>
-            <div class="form-group">
+            <div class="form-group" [ngClass]="{'has-error': invalid}">
                 <label for="hours1">Select Hours:</label>
-                <select id="hours1" class="form-control" formControlName="selectHours">
+                <select id="hours1" class="form-control" formControlName="selectHours" [ngModel]="selecthour" (ngModelChange)="checkAvail($event,'selecthour')">
                 <option *ngFor="let hour of selectHours;let i = index"  value="{{hour}}">{{hour}}</option>
             </select>
             </div>
+            <div *ngIf="invalid" [ngClass]="{'has-error': invalid}">This time is reserved by someone</div>
         </div>
         <hr>
         <!--<div class="container">-->
@@ -32,12 +33,12 @@
             <div class="toggle-button__icon"></div>
 </div>
 </div>-->
-<!--</div>-->
+        <!--</div>-->
 
-<div class="form-group">
-    <button type="submit" class="btn btn-primary">Book Slot</button>
-</div>
-</form>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Book Slot</button>
+        </div>
+    </form>
 </div>
 </div>
 </div>

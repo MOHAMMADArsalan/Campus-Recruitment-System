@@ -20,17 +20,22 @@ export class TableRowComponent {
     keys(object) {
         return object ? Object.keys(object) : [];
     }
-    delete(key, location, slotId) {
+    printScreen() {
+        window.print();
+    }
+    delete(key, location, slotId, date) {
         let slot = slotId.split(" ")[1];
         let multipath = {};
         multipath[`user-parking/${this.currentUser.auth.uid}/${key}`] = null;
         multipath[`parking-location/${location}/${slot}/booked-by`] = "";
+        multipath[`parking-availablity/${location}/${slot}/${date}/${key}`] = null;
+
         multipath[`parking-location/${location}/${slot}/end-time`] = "";
         multipath[`parking-location/${location}/${slot}/start-time`] = "";
         multipath[`parking-location/${location}/${slot}/status`] = 0;
         multipath[`parking-location/${location}/${slot}/key`] = "";
-        
-        console.log("delete",multipath)
+
+        console.log("delete", multipath, key)
         this.deleteData.emit(multipath)
     }
 }

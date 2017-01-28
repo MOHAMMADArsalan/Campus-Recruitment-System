@@ -1,6 +1,6 @@
 
 <div class="container">
-    <button type="button" (click)="Changes();isShow = true" class="btn btn-primary  pull-right height35px marginTop20px" data-toggle="modal"
+    <button *ngIf="currentUser.type != 1" type="button" (click)="Changes();isShow = true" class="btn btn-primary  pull-right height35px marginTop20px" data-toggle="modal"
         data-target="#myModal">Feedback..</button>
     <br>
     <br>
